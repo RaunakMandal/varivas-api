@@ -9,12 +9,12 @@ exports.getMoviesByCategory = (req, res) => {
         data: movies,
       })
     )
-    .catch((err) =>
-      res.status(400).json({
+    .catch((err) => {
+      return res.status(500).json({
         success: false,
-        error: err.message,
-      })
-    );
+        error: "Something went wrong",
+      });
+    });
 };
 
 exports.createMovie = (req, res) => {

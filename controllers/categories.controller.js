@@ -1,13 +1,5 @@
 const Category = require("../models/categories.model");
 
-const rephraseError = (err) => {
-  if (err.code === 11000) {
-    return "Category already exists";
-  } else {
-    return err.message;
-  }
-};
-
 exports.createCategory = (req, res) => {
   const { name } = req.body;
   const category = new Category({
@@ -25,7 +17,7 @@ exports.createCategory = (req, res) => {
     .catch((err) => {
       return res.status(400).json({
         success: false,
-        error: rephraseError(err),
+        error: err.message,
       });
     });
 };
@@ -36,13 +28,18 @@ exports.getCategories = (req, res) => {
       return res.status(200).json({
         success: true,
         count: categories.length,
-        data: categories,
+        data: categories.map((category) => {
+          return {
+            _id: category._id,
+            name: category.name,
+          };
+        }),
       });
     })
     .catch((err) => {
-      return res.status(400).json({
+      return res.status(500).json({
         success: false,
-        error: rephraseError(err),
+        error: "Something went wrong",
       });
     });
 };
