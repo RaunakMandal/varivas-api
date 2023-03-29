@@ -13,13 +13,16 @@ This repo contains the code of the Backend app that is being used by the Varivas
    npm install
    ```
 3. After the dependencies are installed, create a `.env` file and add the following Keys.
-   ```env
+   ```
    PORT=8080
    MONGODB_URL=
    CLIENT_URL=http://localhost:4200
    ```
    Reach out to me for `MONGODB_URL` or you can set your own.
 4. Now run the app and it should be accessible at `http://localhost:${PORT}/api`
+    ```bash
+    npm start
+    ```
 
 ### Dependencies
 1. CORS
